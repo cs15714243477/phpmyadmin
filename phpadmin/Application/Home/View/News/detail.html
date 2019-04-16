@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name = "format-detection" content = "telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <include file="Layout:seoicon" />
+
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/chang/css/slick.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/media.css">
+    <script src="__PUBLIC__/chang/js/jquery-1.9.1.js"></script>
+
+
+    <script src="__PUBLIC__/chang/js/common.js"></script>
+    <!--[if IE]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+    <!--[endif]-->
+    <script type="text/javascript">
+        if(screen.width > 992){
+            function ResetPosition()
+            {
+                var h = $(window).height();
+//            $(".banner").css({height:h});
+                $("#bannerPc .slick-slide").css({height:h});
+            }
+            $(document).ready(ResetPosition);
+            $(window).resize(ResetPosition);
+
+        }
+
+        $(function(){
+            $('a[href*=#],area[href*=#]').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var $target = $(this.hash);
+                    $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+                    if ($target.length) {
+                        var targetOffset = $target.offset().top;
+                        $('html,body').animate({scrollTop: targetOffset},800);
+                        return false;
+                    }
+                }
+            });
+        });
+
+
+    </script>
+
+</head>
+<body>
+<!--公共头-->
+<include file="Layout:header" />
+<!--新闻页公共轮播-->
+<div class="page-banner" style="background-image: url({$nav[$cname]['image']});"></div>
+
+
+<!--定位-->
+<div class="page-position">
+    <div class="box">
+        <p><i class="iconfont icon-tianchongxing-"></i>您当前所在的位置：<a href="#">龙兴区块链</a> ><a href="#">龙兴区块链</a> > <span>新闻动态</span></p>
+    </div>
+</div>
+
+
+<!--news-->
+
+<div class="page-new">
+    <div class="box">
+
+
+        <div class="page-con">
+            <div class="page-title">
+                <h1>{$info.title}</h1>
+                <p><span>已被浏览{$info.viewnum}次</span><span>更新日期：{$info.addtime}</span></p>
+            </div>
+            <div class="page-con-text">
+                {$info.content}
+            </div>
+            <div class="case-no">
+                <div class="case-no-1">
+                    <?php if($prev){ ?>
+                    <p><a href="__ROOT__/index.php/home/news/detail?id={$prev.id}">上一篇：{$prev.title}</a> </p>
+                    <?php }else{ ?>
+                    <p><a href="#">上一篇：暂无</a> </p>
+                    <?php } ?>
+                    <?php if($next){ ?>
+                    <p><a href="__ROOT__/index.php/home/news/detail?id={$next.id}">下一篇：{$next.title}</a> </p>
+                    <?php }else{ ?>
+                    <p><a href="#">下一篇：暂无</a> </p>
+                    <?php } ?>
+
+                </div>
+                <div class="case-no-2">
+                    <a href="__ROOT__/index.php/home/news">返回新闻列表</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--公共尾-->
+<include file="Layout:footer" />
+
+
+
+
+<script type="text/javascript" src="__PUBLIC__/chang/js/slick.js"></script>
+
+<script>
+    var id = "{$info['id']}";
+    $.post('addnum',{id:id});
+</script>
+
+
+</body>
+</html>

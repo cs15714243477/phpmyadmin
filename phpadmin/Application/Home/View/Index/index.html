@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0" name="viewport" />
+    <title></title>
+    <link href="https://cdn.bootcss.com/Swiper/4.4.6/css/swiper.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/xsj/css/reset.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/xsj/css/style.css"/>
+    <script src="__PUBLIC__/xsj/js/rem.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/xsj/js/jquery-1.9.1.js"></script>
+    <script src="__PUBLIC__/xsj/layer/mobile/layer.js"></script>
+    <script src="https://cdn.bootcss.com/Swiper/4.4.6/js/swiper.min.js"></script>
+
+
+</head>
+<body>
+<div class="search" id="search">
+
+    <div class="search-box">
+        <form method="post" action="/home/index/search">
+        <input type="text" name="keywords" placeholder="输入关键字"/>
+        <button type="submit">搜索</button>
+        </form>
+    </div>
+
+</div>
+
+
+<include file="Layout:nav" />
+<div id="main-box">
+<div id="main">
+    <!--<div style="height: 1.6rem;"></div>-->
+    <?php foreach($onetype as $k=>$v){ ?>
+    <div class="mainPage " id="page{$v['id']}" <?php if($k==0){ ?>style="display: block;" <?php } ?>>
+    <?php foreach($twotype as $kk=>$vv){ ?>
+    <?php if($vv['pid'] == $v['id']){ ?>
+        <div>
+            <h1>{$vv.name}</h1>
+            <ul class="list">
+                <?php foreach($list as $kkk=>$vvv){ ?>
+                <?php if($vvv['typeid'] == $vv['id']){ ?>
+                <li onclick="show({$vvv['id']})">
+                    <a href="javascript:void (0);">
+                        <img src="{$vvv['image']['0']}" alt=""  style="height:180px"/>
+                    </a>
+                </li>
+                <?php } ?>
+                <?php } ?>
+            </ul>
+            <a href="__ROOT__/index.php/home/index/lists?id={$vv.id}" class="list-more">点击查看更多</a>
+        </div>
+    <?php } ?>
+    <?php } ?>
+    </div>
+  <?php } ?>
+
+
+</div>
+</div>
+
+<div class="swiper-container img-list" >
+    <span class="hide">×</span>
+    <div class="swiper-wrapper" id="imagelist">
+
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</div>
+
+
+<!-- Initialize Swiper -->
+<script>
+
+    function show(a)
+    {
+        $("#imagelist").empty();
+        $.post('/home/index/image',{id:a},function(data){
+            $(".img-list").show();
+            $("body,html").addClass("body-hide");
+
+            for(var i=0;i<data.length;i++)
+            {
+                $("#imagelist").append('<div class="swiper-slide"><img src="'+data[i]+'" alt="" /></div>');
+            }
+            swiper = new Swiper('.swiper-container', {
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'fraction'
+                },
+                observer:true,/*启动动态检查器，当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper。*/
+                observeParents:true/*将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新。*/
+
+
+
+            });
+        })
+    }
+
+    $(".hide").click(function () {
+        $("#imagelist").empty();
+        $(".img-list").hide();
+        $("body,html").removeClass("body-hide");
+
+    });
+
+
+</script>
+
+
+
+
+
+
+</body>
+<script>
+    var a = '{$ll}';
+    $('#nav a').eq(a).addClass("active").siblings().removeClass("active");
+    $("#main .mainPage").eq(a).fadeIn(150).siblings("div.mainPage").hide();
+</script>
+</html>

@@ -1,0 +1,28 @@
+<div class="layui-form-item">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend style="margin: 0 auto">多图片</legend>
+    </fieldset>
+    <style>
+        .layui-upload-img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <label class="layui-form-label" for="{%{name}%}">{%{required1}%}{%{title}%}</label>
+    <div class="layui-upload">
+        <input type="hidden"  name="{%{name}%}" {%{required2}%} {%{attr}%} value="" id="{%{name}%}_show">
+        <button type="button" class="layui-btn" id="{%{name}%}_show_b">
+            <i class="layui-icon">&#xe67c;</i>选择图片
+        </button>
+
+        <button type="button" class="layui-btn" id="{%{name}%}_show_action">
+            <i class="layui-icon">&#xe67c;</i>上传图片
+        </button>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+            预览图：
+            <ul id="{%{name}%}_list"></ul>
+        </blockquote>
+    </div>
+    <!--图片裁剪功能-->
+    <!--<div id="cropperdiv"></div>-->
+</div>

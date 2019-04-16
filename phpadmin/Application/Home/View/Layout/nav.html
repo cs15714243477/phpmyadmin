@@ -1,0 +1,20 @@
+<div id="nav">
+    <?php foreach($onetype as $k=>$v){ ?>
+    <?php if($pid){ ?>
+    <a  href="__ROOT__/index.php/home/index/index?p={$v.id}" <?php if($pid == $v['id']){ ?> class="active <?php } ?>">{$v.name}</a>
+    <?php }else{ ?>
+    <a  href="javascript:void(0)" <?php if($k == 0){ ?> class="active" <?php } ?> >{$v.name}</a>
+    <?php } ?>
+    <?php } ?>
+</div>
+<script>
+    $(function () {
+        $("#nav a").click(function () {
+            var liindex = $('#nav a').index(this);
+            $(this).addClass("active").siblings().removeClass("active");
+            $("#main .mainPage").eq(liindex).fadeIn(150).siblings("div.mainPage").hide();
+
+        })
+    });
+
+</script>

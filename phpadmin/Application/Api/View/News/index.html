@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name = "format-detection" content = "telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <include file="Layout:seoicon" />
+
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/chang/css/slick.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/chang/css/media.css">
+    <script src="__PUBLIC__/chang/js/jquery-1.9.1.js"></script>
+
+
+    <script src="__PUBLIC__/chang/js/common.js"></script>
+    <!--[if IE]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+    <!--[endif]-->
+    <script type="text/javascript">
+        if(screen.width > 992){
+            function ResetPosition()
+            {
+
+                var h = $(window).height();
+//            $(".banner").css({height:h});
+                $("#bannerPc .slick-slide").css({height:h});
+            }
+            $(document).ready(ResetPosition);
+            $(window).resize(ResetPosition);
+
+        }
+
+        $(function(){
+            $('a[href*=#],area[href*=#]').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var $target = $(this.hash);
+                    $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+                    if ($target.length) {
+                        var targetOffset = $target.offset().top;
+                        $('html,body').animate({scrollTop: targetOffset},800);
+                        return false;
+                    }
+                }
+            });
+        });
+
+
+    </script>
+    <style>
+        .Page a,
+        .Page span {
+            display: inline-block;
+            padding: 2px 10px;
+            color:#333;
+            margin: 0 1px;
+            border: 1px solid #f0f0f0;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            font-size:16px;
+        }
+
+        .Page a{
+            font-size:16px;
+        }
+        .Page li {
+            display: inline-block;
+            list-style: none;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .Page a.first,
+        .Page a.prev,
+        .Page a.next,
+        .Page a.end {
+            margin: 0;
+        }
+
+        .Page a:hover {
+            border-color: #e60000;
+        }
+
+        .Page span.current {
+            background: #e60000;
+            color: #FFF;
+            font-weight: 700;
+            border-color: #e60000;
+        }
+    </style>
+</head>
+<body>
+<!--公共头-->
+<include file="Layout:header" />
+<!--新闻页公共轮播-->
+<div class="page-banner" style="background-image: url({$nav[$cname]['image']});"></div>
+
+
+<!--定位-->
+<div class="page-position">
+    <div class="box">
+        <p><i class="iconfont icon-tianchongxing-"></i>您当前所在的位置：<a href="#">龙兴区块链</a> ><a href="#">龙兴区块链</a> > <span>新闻动态</span></p>
+    </div>
+</div>
+
+
+<!--news-->
+
+<div class="page-new">
+    <div class="box">
+
+            <ul class="page-new-list">
+
+                <?php foreach($list as $k=>$v){ ?>
+                <li>
+                    <a href="__ROOT__/index.php/home/news/detail?id={$v.id}">
+                        <div class="newpic">
+                            <img src="{$v.image}" alt="" />
+                        </div>
+                        <div class="new-rg-con">
+                            <h2>{$v.name}</h2>
+                            <p>{$v['introduce']}</p>
+                        </div>
+                        <div class="new-rg-time">
+                            <span>{$v.addtime2}</span>
+                            <p>{$v.addtime1}</p>
+                        </div>
+                    </a>
+                </li>
+                <?php } ?>
+
+            </ul>
+        <!--分页盒子-->
+        <!--<div class="paging-box" >-->
+            <!--<div class="paging" >-->
+                <!--<div class="paging11"><a href=""><p>首页</p></a></div>-->
+                <!--<ul class="paging1">-->
+                    <!--<li class="hover"><a href="#"><p>1</p></a></li>-->
+                    <!--<li><a href="#"><p>2</p></a></li>-->
+                    <!--<li><a href="#"><p>3</p></a></li>-->
+                    <!--<li><a href="#"><p>4</p></a></li>-->
+                    <!--<li><a href="#"><p>5</p></a></li>-->
+                    <!--<li><a href="#"><p>6</p></a></li>-->
+                    <!--<li><a href="#"><p>7</p></a></li>-->
+                    <!--<li><a href="#"><p>8</p></a></li>-->
+                    <!--<div class="clear"></div>-->
+                <!--</ul>-->
+                <!--<div class="paging12">跳转至</div>-->
+                <!--<select class="paging13">-->
+                    <!--<option>2</option>-->
+                    <!--<option>3</option>-->
+                    <!--<option>4</option>-->
+                    <!--<option>5</option>-->
+                <!--</select>-->
+                <!--<div class="paging14"><a href=""><p>确定</p></a></div>-->
+                <!--<div class="clear"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="Page" style="margin-top:10px">
+            <center>
+                {$page}
+            </center>
+
+        </div>
+    </div>
+</div>
+<!--公共尾-->
+<include file="Layout:footer" />
+
+
+<script type="text/javascript" src="__PUBLIC__/chang/js/slick.js"></script>
+
+<script>
+
+</script>
+
+
+
+</body>
+</html>
